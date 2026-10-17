@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inconsolata", monospace;
+}
+
+html,
+body {
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
+body,
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  background-color: #0d1117;
+}
+
+canvas {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  left: 0px;
+  z-index: 1;
+  max-width: calc(100% - 3px);
+  margin: auto;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+}
+
+#sand-canvas {
+  z-index: 2;
+}
+
+canvas,
+img {
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border: 1px solid #374151;
+  border-radius: 6px;
+  margin: 2px 4px;
+  height: 30px;
+}
+
+.brand-logo {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+button {
+  z-index: 3;
+  position: relative;
+  height: 30px;
+  min-width: 32px;
+  font-size: 15px;
+  padding: 2px 8px;
+  background-color: #1e2430;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  margin: 2px;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+
+button:hover {
+  background-color: #2d3748;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+button.action-btn {
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  font-weight: 500;
+}
+
+button.action-btn:hover {
+  background: #334155;
+  border-color: #60a5fa;
+}
+
+button.selected {
+  outline: 2px solid #60a5fa;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button:focus {
+  outline: none;
+}
+
+#ui {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 4px;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 3;
+  position: relative;
+}
+
+.sizes {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 4px;
+}
+
+.sizes button {
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.sizes svg circle {
+  fill: #94a3b8;
+}
+
+.sizes button.selected svg circle {
+  fill: #60a5fa;
+}
+
+#fps {
+  pointer-events: none;
+  z-index: 3;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 4px 8px;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-family: monospace;
+  white-space: pre;
+  user-select: none;
+}
+
+.menu {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 20px;
+  z-index: 5;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: auto;
+}
+
+.menu h1, .menu h2, .menu h4 {
+  color: #f8fafc;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.menu h1 {
+  font-size: 26px;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu p {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.menu hr {
+  border: 0;
+  border-top: 1px solid #334155;
+  margin: 16px 0;
+}
+
+.menu-scrim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.x {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.x button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  background: #334155;
+  color: #f1f5f9;
+}
+
+.x button:hover {
+  background: #ef4444;
+}
